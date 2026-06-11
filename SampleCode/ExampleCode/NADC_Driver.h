@@ -79,11 +79,11 @@
 #define REG_ADDR_OSC_CTRL2                      0x0E /* Internal Oscillator Control Register 2 */
 #define REG_ADDR_OSC_CTRL3                    	0x0F /* Internal Oscillator Control Register 3 */
 #define REG_ADDR_REF_CTRL                       0x10 /* Reference Voltage Control Register */
-#define REG_ADDR_PGA_CTRL1                      0x11 /* PGA Control Register 1*/
+#define REG_ADDR_PGA_CTRL1                      0x11 /* PGA Control Register 1 */
 #define REG_ADDR_PGA_CTRL2                      0x12 /* PGA Control Register 2 */
-#define REG_ADDR_PGA_CTRL3                      0x13 /* PGA Control Register 1*/
+#define REG_ADDR_PGA_CTRL3                      0x13 /* PGA Control Register 1 */
 #define REG_ADDR_PGA_CTRL4                      0x14 /* PGA Control Register 2 */
-#define REG_ADDR_PGA_CTRL5                      0x15 /* PGA Control Register 1*/
+#define REG_ADDR_PGA_CTRL5                      0x15 /* PGA Control Register 1 */
 #define REG_ADDR_PGA_CTRL6                      0x16 /* PGA Control Register 2 */
 #define REG_ADDR_ADC_OFFSET_CAL1                0x17 /* ADC Offset Calibration Data Register 1 */
 #define REG_ADDR_ADC_OFFSET_CAL2                0x18 /* ADC Offset Calibration Data Register 2 */

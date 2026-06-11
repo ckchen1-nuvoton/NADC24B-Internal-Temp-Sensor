@@ -76,7 +76,7 @@ uint8_t Reset_NADC24B(void)
 
     /* Enable Chopping */
     SPI_WriteReg_Bank1_Until_Success(REG_ADDR_CHOP_CTRL, 0x04);
-
+		
     /* Lock registers */
     SPI_WriteReg_Bank2(REG_ADDR_PROTECT_KEY, 0xCA);
 		
@@ -174,12 +174,24 @@ uint8_t NADC24B_Cali_and_Initial(void)
 		u8RegVal = (SPI_ReadReg_Bank1(REG_ADDR_PGA_CTRL1) & ~(PGA_CTRL1_SEL_PGA_INP_Msk | PGA_CTRL1_SEL_PGA_INN_Msk)) |
 							 (PGA_CTRL1_SEL_PGA_INP_VCM | PGA_CTRL1_SEL_PGA_INN_VCM);
 		SPI_WriteReg_Bank1_Until_Success(REG_ADDR_PGA_CTRL1, u8RegVal);
+		
+		
+		/* Remove the first 8 unstable samples */
+		SPI_Send_ADC_Commnad(ADC_START_CONVERSION_CMD);
+		
+		for (i = 0; i < 8; i++)
+		{
+				while (nDRDY == 1);
+				u32AdcData = SPI_ReadADCDataWithReadCMD();
+		}
+		
+		SPI_Send_ADC_Commnad(ADC_STOP_CONVERSION_CMD);		
 
-		/* Average 8 samples for pre-calibration check */
+		/* Average 4 samples for pre-calibration check */
 		SPI_Send_ADC_Commnad(ADC_START_CONVERSION_CMD);
 		
 		s32AdcDataSum = 0;
-		for (i = 0; i < 8; i++)
+		for (i = 0; i < 4; i++)
 		{
 				while (nDRDY == 1);
 				u32AdcData = SPI_ReadADCDataWithReadCMD();
@@ -190,7 +202,7 @@ uint8_t NADC24B_Cali_and_Initial(void)
 
 				s32AdcDataSum += (int32_t)u32AdcData;
 		}
-		s32CalibData = s32AdcDataSum / 8;
+		s32CalibData = s32AdcDataSum / 4;
 		if(DEBUG_ENABLE) printf("     Before Calibration : %d\n", s32CalibData);
 		
 		SPI_Send_ADC_Commnad(ADC_STOP_CONVERSION_CMD);
@@ -204,11 +216,11 @@ uint8_t NADC24B_Cali_and_Initial(void)
 		u8RegVal = (SPI_ReadReg_Bank1(REG_ADDR_PGA_CTRL3) & ~PGA_CTRL3_OFFSETDIS_Msk) | (PGA_CTRL3_OFFSET_CAL_EN);
     SPI_WriteReg_Bank1_Until_Success(REG_ADDR_PGA_CTRL3, u8RegVal);
 
-		/* Average 8 samples for post-calibration verification */
+		/* Average 4 samples for post-calibration verification */
 		SPI_Send_ADC_Commnad(ADC_START_CONVERSION_CMD);
 		
 		s32AdcDataSum = 0;
-		for (i = 0; i < 8; i++)
+		for (i = 0; i < 4; i++)
 		{
 				while (nDRDY == 1);
 				u32AdcData = SPI_ReadADCDataWithReadCMD();
@@ -218,7 +230,7 @@ uint8_t NADC24B_Cali_and_Initial(void)
 
 				s32AdcDataSum += (int32_t)u32AdcData;
 		}
-		s32CalibData = s32AdcDataSum / 8;
+		s32CalibData = s32AdcDataSum / 4;
 		if(DEBUG_ENABLE) printf("      After Calibration : %d\n", s32CalibData);
 		
 		SPI_Send_ADC_Commnad(ADC_STOP_CONVERSION_CMD);
