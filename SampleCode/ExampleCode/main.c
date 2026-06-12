@@ -10,7 +10,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "NuMicro.h"
-#include "NADC_Driver.h"
+#include "NADC24B_Driver.h"
 #include "arm_math.h"
 
 /*---------------------------------------------------------------------------------------------------------*/

@@ -405,14 +405,14 @@
               <FilePath>..\main.c</FilePath>
             </File>
             <File>
-              <FileName>NADC_Driver.c</FileName>
+              <FileName>NADC24B_Driver.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\NADC_Driver.c</FilePath>
+              <FilePath>..\NADC24B_Driver.c</FilePath>
             </File>
             <File>
-              <FileName>NADC_Driver.h</FileName>
+              <FileName>NADC24B_Driver.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\NADC_Driver.h</FilePath>
+              <FilePath>..\NADC24B_Driver.h</FilePath>
             </File>
           </Files>
         </Group>

@@ -11,7 +11,7 @@
 #include <string.h>
 
 #include "NuMicro.h"
-#include "NADC_Driver.h"
+#include "NADC24B_Driver.h"
 
 /*---------------------------------------------------------------------------------------------------------*/
 /* Functions                                                                                               */
