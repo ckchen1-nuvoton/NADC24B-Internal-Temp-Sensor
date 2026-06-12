@@ -101,11 +101,6 @@ uint8_t NADC24B_Cali_and_Initial(void)
     u8RegVal = (SPI_ReadReg_Bank1(REG_ADDR_PWD_CTRL1) & ~(PWD_CTRL1_PWD_DAC_Msk | PWD_CTRL1_PWD_DACBUF_Msk)) |
                (PWD_CTRL1_PWD_DAC_POWER_DOWN | PWD_CTRL1_PWD_DACBUF_POWER_DOWN);
     SPI_WriteReg_Bank1_Until_Success(REG_ADDR_PWD_CTRL1, u8RegVal);
-
-    /* Power down PGA buffer and Modulator REFP buffer */
-    //u8RegVal = (SPI_ReadReg_Bank1(REG_ADDR_PWD_CTRL2) & ~(PWD_CTRL2_PWD_MOD_REFP_Msk | PWD_CTRL2_PWD_PGA_BUFF_Msk)) |
-    //           (PWD_CTRL2_PWD_MOD_REFP_POWER_DOWN | PWD_CTRL2_PWD_PGA_BUFF_POWER_DOWN);
-    //SPI_WriteReg_Bank1_Until_Success(REG_ADDR_PWD_CTRL2, u8RegVal);
 		
 		/* Configure DF1 : OSR=65536, Bypass IIR, Gain=1X */
     u8RegVal = (SPI_ReadReg_Bank1(REG_ADDR_DF_CTRL1) & ~(DF_CTRL1_OSR_SEL_Msk | DF_CTRL1_BYPASS_IIR_Msk | DF_CTRL1_DF_GAIN_Msk)) |
